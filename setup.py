@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ipycrawl",
-    version="0.0.0",
+    version="0.0.2",
     author="innovata",
     author_email="iinnovata@gmail.com",
     description='파일 다운로드 및 각종 RESTful OpenAPI 를 사용하여 데이타를 수집하는 Innovata Web Crawler 라이브러리 패키지',

@@ -1,5 +1,9 @@
 pypi 
 pytest 
+ipykernel
 
 
 requests 
+
+
+ipylib
