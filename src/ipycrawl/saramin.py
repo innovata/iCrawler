@@ -16,7 +16,17 @@ from ipylib import idatetime
 
 
 
-ACCESS_KEY = '2uuet7IItQfyFXJzfRRktOBlPVVy2eFLZz3KygpZTclXQdzoDXH0i'
+
+
+def get_access_key():
+    try:
+        return os.environ['SARAMIN_KEY']
+    except Exception as e:
+        logger.error([e, "os.environ['SARAMIN_KEY']=YOUR_ACCESS_KEY"])
+        raise
+
+ACCESS_KEY = get_access_key()
+
 
 DICTIONARY = {
     'opening-timestamp': '채용공고 시작일',
