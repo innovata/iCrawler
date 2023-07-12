@@ -20,10 +20,22 @@ from ipylib import idatetime
 
 def get_access_key():
     try:
-        return os.environ['SARAMIN_KEY']
+        filepath = os.environ['SARAMIN_CREDENTIAL_PATH']
+        if os.path.isfile(filepath): pass 
+        else: raise
     except Exception as e:
-        logger.error([e, "os.environ['SARAMIN_KEY']=YOUR_ACCESS_KEY"])
+        msg = """
+            ipycrawl 패키지를 임포트 하기 전에 아래와 같이 OpenAPI 액세스 키 파일경로를 설정해야한다.
+            os.environ['SARAMIN_CREDENTIAL_PATH']=YOUR_SARAMIN_CREDENTIAL_JSON_FILE_PATH
+        """
+        logger.error([e, msg])
         raise
+    else:
+        with open(filepath, mode='r') as f:
+            d = json.loads(f.read())
+            print(d)
+        return d['ACCESS_KEY']
+
 
 ACCESS_KEY = get_access_key()
 
