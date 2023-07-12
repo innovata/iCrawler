@@ -6,6 +6,9 @@ from importlib import reload
 import requests
 
 
+from ipylib.idebug import *
+
+
 
 # 프로젝트 소스코드 위치 셋업
 _dir = os.path.join('c:\pypjts', 'iCrawler', 'src')
