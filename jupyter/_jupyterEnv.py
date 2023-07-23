@@ -16,12 +16,12 @@ sys.path.append(_dir)
 
 
 
-from ipycrawl import file, linkedin, saramin, seleniumX, mdb
+from ipycrawl import file, linkedin, saramin
 
 
 
 def reload_all():
     modules = [
-        file, linkedin, saramin, seleniumX, mdb,
+        file, linkedin, saramin
     ]
     for m in modules: reload(m)
