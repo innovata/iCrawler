@@ -15,17 +15,26 @@ Saramin 채용정보 API 웹페이지에서 회원가입을 하고 로그인 한
 
     https://oapi.saramin.co.kr/
 
-발급받은 액세스 키는 다음과 같은 형식으로 JSON파일로 생성하고, 임의의 경로에 저장한 뒤 절대경로를 복사해둔다.
+발급받은 액세스 키는 다음과 같은 형식으로 파일명을 'credential.json' 으로 생성하고, 임의의 경로에 저장한 뒤 '절대경로'를 복사해둔다.
 
     {
-        "ACCESS_KEY": "YOUR_ACCESS_KEY"
+        "사람인": {
+            "ACCESS_KEY": "YOUR_ACCESS_KEY",
+            "USER_ID": "YOUR_ID",
+            "USER_PASSWORD": "YOUR_PASSWORD"
+        },
+        "LinkedIn": {
+            "USER_ID": "YOUR_ID",
+            "USER_PASSWORD": "YOUR_PASSWORD"
+        },
+        ...
     }
 
-Jupyter 파일을 열고 커널을 선택한 후, 첫번째 셀에서 ipycrawl 패키지를 임포트 하기 전에 조금 전에 복사해 둔 절대경로를 아래와 같이 설정한다.
+Jupyter 파일을 열고 커널을 선택한 후, 첫번째 셀에서 ipycrawl 패키지를 임포트 하기 전에 조금 전에 복사해 둔 '절대경로'를 아래와 같이 설정한다.
 
     import os
 
-    os.environ['SARAMIN_CREDENTIAL_PATH']=YOUR_SARAMIN_CREDENTIAL_JSON_FILE_PATH
+    os.environ['CREDENTIAL_PATH']=YOUR_CREDENTIAL_JSON_FILE_PATH
 
 
 

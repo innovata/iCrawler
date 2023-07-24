@@ -153,5 +153,5 @@ cython_debug/
 .idea/
 
 
-# 비밀파일
-Credentials/
+# ID/PW, AccessKey 등 비밀정보
+credentials.json

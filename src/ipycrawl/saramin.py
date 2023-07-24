@@ -16,8 +16,7 @@ from ipylib.idebug import *
 from ipylib import idatetime
 
 
-
-
+from ipycrawl import credential
 
 
 
@@ -35,26 +34,17 @@ DICTIONARY = {
 }
 
 
-def read_credential_file():
-    try:
-        filepath = os.environ['SARAMIN_CREDENTIAL_PATH']
-        if os.path.isfile(filepath): pass 
-        else: raise
-    except Exception as e:
-        logger.error([e, 'README.md 를 읽어보세요'])
-        raise
-    else:
-        with open(filepath, mode='r') as f:
-            d = json.loads(f.read())
-            f.close()
-        return d
-
+def saramin_secret(): return credential.read_credential_file('사람인')
 
 
 def access_key():
-    d = read_credential_file()
+    d = saramin_secret()
     return d['ACCESS_KEY']
-    
+
+def id_passward():
+    d = saramin_secret()
+    return d['USER_ID'], d['USER_PASSWORD']
+
 
 def get_id_from_url(url):
     o = urlparse(url)
@@ -286,8 +276,7 @@ class SaramInBrowser(object):
 
 def login(driver):
     driver.get('https://www.saramin.co.kr/zf_user/auth')
-    d = read_credential_file()
-    id, pw = d['USER_ID'], d['USER_PASSWORD']
+    id, pw = id_passward()
     
     input_id = driver.find_element(By.ID, 'id')
     # print({'input_id': input_id})
