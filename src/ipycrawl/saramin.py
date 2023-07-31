@@ -380,6 +380,8 @@ class JobPostPage(object):
             url = self.homeUrl + a.attrs['href']
             # print(url)
             self.driver.get(url)
+    # 기술스택 파싱
+    def tech_stack(self): pass 
     
 
 def parse_page(driver):
