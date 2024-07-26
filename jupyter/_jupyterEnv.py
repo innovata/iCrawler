@@ -8,6 +8,8 @@ import requests
 
 from ipylib.idebug import *
 
+from ipycrawl.crawlers import linkedin, saramin
+
 
 
 # 프로젝트 소스코드 위치 셋업
@@ -16,7 +18,7 @@ sys.path.append(_dir)
 
 
 
-from ipycrawl import credential, file, linkedin, saramin, seleniumX, mdb
+from ipycrawl import credential, file, seleniumX, mdb
 
 
 
