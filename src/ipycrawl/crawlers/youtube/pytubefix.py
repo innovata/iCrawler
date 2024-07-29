@@ -14,6 +14,7 @@ pp = pprint.PrettyPrinter(indent=2)
 
 from pytubefix import YouTube 
 from pytubefix.cli import on_progress
+from moviepy.video.io.ffmpeg_tools import ffmpeg_merge_video_audio
 
 
 
@@ -24,34 +25,49 @@ def download_video(url, _dir=os.getcwd()):
     yt = YouTube(url, on_progress_callback = on_progress)
     print('Title:', yt.title)
     
+
+    # 비디오파일 다운로드(오디오 없음) (360p 만 오디오까지 한번에 있기 때문에...)
     stream = select_highest_resolution(yt)
-    resolution = stream.__dict__['resolution']
-    print('Resolution:', resolution)
-    # mp4file = os.path.join(_dir, f"{yt.title}_{resolution}.mp4")
-    # print(f"Download File: {mp4file}")
+    if stream is None:
+        print("ERROR | 원하는 고해상도 영상은 없다.")
+    else:
+        resolution = stream.__dict__['resolution']
+        print('Resolution:', resolution)
+
+        print('Downloading...')
+        video_path = stream.download(
+            output_path=_dir, 
+            filename='video',
+        )
+
+        # 오디오파일 다운로드
+        stream = yt.streams.get_audio_only()
+        bit_rate = stream.__dict__['abr']
+        print('Downloading...')
+        audio_path = stream.download(
+            output_path=_dir, 
+            filename='audio', 
+            mp3=True
+        )
+        
+        # 비디오, 오디오 합치기
+        output_path = os.path.join(_dir, f"{yt.title}_{resolution}_{bit_rate}.mp4")
+        ffmpeg_merge_video_audio(video_path, audio_path, output_path, vcodec='copy', acodec='copy', ffmpeg_output=False, logger='bar')
 
 
-    mp4file = stream.download(output_path=_dir, filename=f"{yt.title}_{resolution}.mp4", mp3=True)
-    print(f"DONE | {mp4file}")
+        print(f"DONE | {output_path}")
 
-    # 파일명수정
-    # try:
-    #     os.rename(srcfile, dstfile)
-    #     print(f'DONE | {dstfile}')
-    # except OSError as e:
-    #     print(f"ERROR | {e}")
+        # 임시파일 삭제
+
 
 
 
 def select_highest_resolution(yt):
-    for st in yt.streams:
-        # print('-'*100)
-        # print(type(st))
-        # print(st)
-        if st.__dict__['resolution'] == '1080p':
-            # pp.pprint(st.__dict__)
-            break 
-    return st
+    resolutions = ['1080p','720p']
+    for res in resolutions:
+        streams = yt.streams.filter(file_extension='mp4', resolution=res)
+        if len(streams) > 0:
+            return streams[0]
 
 
 
@@ -66,10 +82,15 @@ def download_mp3(url, _dir=os.getcwd()):
     # print(stream)
     # pp.pprint(stream.__dict__)
     print(f'Bit Rate: {bit_rate}')
-    stream.download(mp3=True)
+    mp3file = stream.download(
+        output_path=_dir, 
+        filename=f"{yt.title}_{bit_rate}", 
+        mp3=True
+    )
 
     # 파일명에 추가정보 
-    print(f'DONE | {os.path.join(_dir, f"{yt.title}_({bit_rate}).mp3")}')
+    print(f'DONE | {mp3file}')
+    return mp3file
 
 
 
