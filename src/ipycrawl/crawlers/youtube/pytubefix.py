@@ -14,7 +14,7 @@ pp = pprint.PrettyPrinter(indent=2)
 
 from pytubefix import YouTube 
 from pytubefix.cli import on_progress
-from moviepy.video.io.ffmpeg_tools import ffmpeg_merge_video_audio
+from moviepy.video.io import ffmpeg_tools
 
 
 
@@ -34,16 +34,18 @@ def download_video(url, _dir=os.getcwd()):
         resolution = stream.__dict__['resolution']
         print('Resolution:', resolution)
 
-        print('Downloading...')
+        print('Downloading video...')
         video_path = stream.download(
             output_path=_dir, 
-            filename='video',
+            filename='video.mp4',
         )
 
         # 오디오파일 다운로드
         stream = yt.streams.get_audio_only()
         bit_rate = stream.__dict__['abr']
-        print('Downloading...')
+        print('Bitrate:', bit_rate)
+
+        print('Downloading audio...')
         audio_path = stream.download(
             output_path=_dir, 
             filename='audio', 
@@ -51,14 +53,18 @@ def download_video(url, _dir=os.getcwd()):
         )
         
         # 비디오, 오디오 합치기
-        output_path = os.path.join(_dir, f"{yt.title}_{resolution}_{bit_rate}.mp4")
-        ffmpeg_merge_video_audio(video_path, audio_path, output_path, vcodec='copy', acodec='copy', ffmpeg_output=False, logger='bar')
+        print("Merging video + audio...")
+        output_path = os.path.join(_dir, f"{yt.title}_({resolution},{bit_rate}).mp4")
+        ffmpeg_tools.ffmpeg_merge_video_audio(
+            video_path, audio_path, output_path, 
+            vcodec='copy', acodec='copy', ffmpeg_output=False, logger='bar'
+        )
 
+        # 비디오/오디오 단독 파일들 삭제
+        for filename in ['video.mp4', 'audio.mp3']:
+            os.remove(os.path.join(_dir, filename))
 
         print(f"DONE | {output_path}")
-
-        # 임시파일 삭제
-
 
 
 
@@ -73,7 +79,7 @@ def select_highest_resolution(yt):
 
 # 유투브 영상속 음원은 기본 128kbps 만 다운로드 된다.
 # 다른 옵션은 존재하지 않는다.
-def download_mp3(url, _dir=os.getcwd()):
+def download_audio(url, _dir=os.getcwd()):
     yt = YouTube(url, on_progress_callback=on_progress)    
     print(yt.title)
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # https://en.ytmp3.nu/ --> 안된다 
 # https://ytmp3.cc/ 웹사이트를 이용해서 mp3를 다운로드하는 기능을 제공한디.
+# 192kbps 품질로 다운로드 가능 
 
 
 

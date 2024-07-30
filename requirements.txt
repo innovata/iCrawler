@@ -8,6 +8,8 @@ lxml
 html5lib
 beautifulsoup4
 selenium
+pytubefix 
+moviepy
 
 
 ipylib
