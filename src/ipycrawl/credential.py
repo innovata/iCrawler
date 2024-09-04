@@ -23,3 +23,5 @@ def read_credential_file(service_name):
             d = json.loads(f.read())
             f.close()
         return d[service_name]
+    
+

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os 
 from urllib.parse import urlparse
-
+from pathlib import WindowsPath
+import json 
 
 import requests
 
@@ -33,3 +34,10 @@ def download(url, _dir, method='GET'):
         pp.pprint(res.__dict__)
         raise 
 
+
+
+def read_json(filepath):
+    with open(str(WindowsPath(filepath)), mode='r', encoding='utf-8') as f:
+        js = json.loads(f.read())
+        f.close()
+    return js 

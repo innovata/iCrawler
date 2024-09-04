@@ -11,10 +11,13 @@ icrawler 패키지와 다름 (https://icrawler.readthedocs.io/en/latest/api.html
 
 # Crawling Service List 
 
-1. YouTube 
-    PyTubeFix.ipynb 
+1. YouTube  
 
-2. Intrsgram 
+        PyTubeFix.ipynb 
+
+2. Intrsgram  
+
+        instagram_selenium.ipynb
 
 
 
