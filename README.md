@@ -9,6 +9,19 @@ icrawler 패키지와 다름 (https://icrawler.readthedocs.io/en/latest/api.html
 
 
 
+
+# Setup Environment
+
+## 1. PACKAGE References:  
+
+### 1.1. PYTUBEFIX  
+https://pypi.org/project/pytubefix/  
+https://pytubefix.readthedocs.io/  
+
+### 1.2. moviepy 
+
+
+
 # Crawling Service List 
 
 1. YouTube  

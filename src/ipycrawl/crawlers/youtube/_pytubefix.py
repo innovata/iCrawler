@@ -12,7 +12,7 @@ import pprint
 pp = pprint.PrettyPrinter(indent=2)
 
 
-from pytubefix import YouTube 
+from ipycrawl.crawlers.youtube._pytubefix import YouTube 
 from pytubefix.cli import on_progress
 from moviepy.video.io import ffmpeg_tools
 
@@ -24,6 +24,11 @@ from moviepy.video.io import ffmpeg_tools
 def download_video(url, _dir=os.getcwd()):
     yt = YouTube(url, on_progress_callback = on_progress)
     print('Title:', yt.title)
+    print("Video ID:", yt.video_id)
+
+    print(yt.check_availability())
+
+    video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
     
 
     # 비디오파일 다운로드(오디오 없음) (360p 만 오디오까지 한번에 있기 때문에...)
