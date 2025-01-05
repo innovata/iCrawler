@@ -2,22 +2,40 @@
 # Python Package instagrapi 를 이용한 크롤러. 
 
 
+
+import os 
+import json 
+import pprint 
+pp = pprint.PrettyPrinter(indent=2)
+
+
 from instagrapi import Client
-from PyQt5.QtCore import *
+# from PyQt5.QtCore import *
 
 
-from ipylib.idebug import *
+# from ipylib.idebug import *
+
+
+CREDENTIAL_PATH = os.environ['INSTAGRAM_CREDENTIAL_PATH']
+DOWNLOAD_PATH = os.environ['INSTAGRAM_DOWNLOAD_PATH']
 
 
 
 CLIENT = Client()
-DOWNLOAD_PATH = 'C:\\Users\\innovata\\Downloads'
 
+
+
+def read_credientials():
+    with open(CREDENTIAL_PATH, 'r', encoding='utf-8') as f:
+        d = json.loads(f.read())
+        f.close()
+    return d 
 
 
 def login():
-    v = CLIENT.login('ahoragabriele@gmail.com', '!5272doubleO')
-    print({'로그인결과':v})
+    cred = read_credientials()
+    v = CLIENT.login(cred['ID'], cred['PASSWORD'])
+    print({'로그인결과': v})
 
 
 def get_videoUrl(media):
@@ -28,14 +46,14 @@ def get_videoUrl(media):
     return url
 
 
-def download(url, path):
+def download(url):
     pk = CLIENT.media_pk_from_url(url)
     media = CLIENT.media_info(pk)
-    dbg.dict(media)
+    pp.pprint(media.__dict__)
 
     video_url = get_videoUrl(media)
 
-    CLIENT.video_download_by_url(video_url, folder=path)
+    CLIENT.video_download_by_url(video_url, folder=DOWNLOAD_PATH)
 
 
 # def collections():
