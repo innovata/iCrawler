@@ -3,8 +3,6 @@ import os
 import json 
 
 
-from ipylib.idebug import *
-
 
 
 
@@ -16,7 +14,7 @@ def read_credential_file(service_name):
         if os.path.isfile(filepath): pass 
         else: raise
     except Exception as e:
-        logger.error([e, 'README.md 를 읽어보세요'])
+        print([e, 'README.md 를 읽어보세요'])
         raise
     else:
         with open(filepath, mode='br') as f:
@@ -25,3 +23,8 @@ def read_credential_file(service_name):
         return d[service_name]
     
 
+def read_credientials(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        d = json.loads(f.read())
+        f.close()
+    return d 
