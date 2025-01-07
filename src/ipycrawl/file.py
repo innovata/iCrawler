@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
+# pip install moviepy
+
 import os 
 from urllib.parse import urlparse
 from pathlib import WindowsPath
 import json 
+import pprint
+pp = pprint.PrettyPrinter(indent=2)
+
 
 import requests
 
+from moviepy.video.io import ffmpeg_tools
 
-from ipylib.idebug import *
+
 
 
 
@@ -29,7 +35,7 @@ def download(url, _dir, method='GET'):
         with open(filepath, 'wb') as f:
             f.write(res.content.strip())
 
-        logger.info('Downloaded. ' + filepath)
+        print('Downloaded. ' + filepath)
     else: 
         pp.pprint(res.__dict__)
         raise 
@@ -41,3 +47,13 @@ def read_json(filepath):
         js = json.loads(f.read())
         f.close()
     return js 
+
+
+
+# 비디오, 오디오 합치기
+def merge_video_audio(video_file, audio_file, dstfile):
+    print("Merging video + audio...")
+    ffmpeg_tools.ffmpeg_merge_video_audio(
+        video_file, audio_file, dstfile, 
+        vcodec='copy', acodec='copy', ffmpeg_output=False, logger='bar'
+    )
