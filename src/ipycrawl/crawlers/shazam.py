@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+# pip install shazamio
+
+
 import requests
 
 url = "https://shazam.p.rapidapi.com/auto-complete"
