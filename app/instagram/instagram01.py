@@ -12,7 +12,7 @@ print('COMPUTER_NAME: ', COMPUTER_NAME)
 
 if COMPUTER_NAME == "RYZEN9-X570-AORUS-ELITE":
     os.environ['INSTAGRAM_CREDENTIAL_PATH'] = "J:\\내 드라이브\\__CREDENTIALS__\\INSTAGRAM\\credentials.json"
-    os.environ['INSTAGRAM_DOWNLOAD_PATH'] = "D:\\LatinDanceData\\Instagram"
+    os.environ['INSTAGRAM_DOWNLOAD_PATH'] = "D:\\__GABRIELE_DRIVE__\\LatinDanceData\\Instagram"
     
 elif COMPUTER_NAME == "":
     os.environ['INSTAGRAM_CREDENTIAL_PATH'] = "H:\\My Drive\\__CREDENTIALS__\\INSTAGRAM\\credentials.json"
@@ -51,12 +51,25 @@ if __name__ == "__main__":
     func = getattr(_instagrapi, func_name)
     print('Executed Function:', func)
 
+
+    # 공통 로그인
+    _instagrapi.login('gabriele')
+
     # 사용자 입력
     url = input("Input your Instagram URL: ")
     print('URL: ' + url)
-
-    # 공통 로그인
-    _instagrapi.login('ghost')
-
     # 실행
     func(url)
+
+
+    # 컬렉션
+    # collections = _instagrapi.get_collections()
+    # print('\nCollections--> Count: %s' % len(collections))
+    # for c in collections: print(c)
+
+    # medias = _instagrapi.get_medias_of_collection(collections[0])
+    # print('\nMedias--> Count: %s' % len(medias))
+    # for m in medias[:5]: print('\n\n', m)
+
+
+    # _instagrapi.download_collection_medias('All posts')

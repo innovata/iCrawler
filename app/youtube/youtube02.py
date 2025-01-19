@@ -8,7 +8,7 @@ sys.path.append("D:\\pypjts\\iCrawler\\src")
 
 
 # LX3-JLE69-KOR
-os.environ["FFMPEG_LOCATION"] = "C:\\FFmpeg\\ffmpeg-2024-12-27-git-5f38c82536-full_build\\bin"
+os.environ["FFMPEG_LOCATION"] = "C:\\FFmpeg\\ffmpeg-7.1-full_build\\bin"
 # pp.pprint(os.environ.__dict__)
 VIDEO_DOWNLOAD_PATH = "D:\\LatinDanceData\\Bachata_Demos\\Temp"
 AUDIO_DOWNLOAD_PATH = "D:\\LatinDanceData\\LatinMusic\\Bachata"
