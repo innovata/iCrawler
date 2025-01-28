@@ -19,19 +19,12 @@ import yt_dlp
 
 
 
-# RYZEN590
-FFMPEG_LOCATION = "C:\\FFmpeg\\ffmpeg-7.1-full_build\\bin"
-# LX3-JLE69-KOR
-# FFMPEG_LOCATION = "C:\\FFmpeg\\ffmpeg-2024-12-27-git-5f38c82536-full_build\\bin"
-FFMPEG_LOCATION = os.environ["FFMPEG_LOCATION"] 
 
 
 
-VIDEO_DOWNLOAD_PATH = "D:\\LatinDanceData\\Bachata_Demos\\Temp"
-AUDIO_DOWNLOAD_PATH = "D:\\LatinDanceData\\LatinMusic\\Bachata"
-AUDIO_GOOGLE_DRIVE_PATH = "H:\\내 드라이브\\MEDIA_DRIVE\\Latin_Music\\Bachata"
-
-
+VIDEO_DOWNLOAD_PATH = os.environ['YOUTUBE_VIDEO_DOWNLOAD_PATH']
+AUDIO_DOWNLOAD_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_PATH']
+AUDIO_DOWNLOAD_GOOGLE_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_GOOGLE_PATH']
 
 
 # ============================================================
@@ -214,7 +207,7 @@ def download_audio(url, output=None, outpath=None):
     info = print_info(url)
     filename = info['title']+'.mp3'
     srcfile = os.path.join(outpath, filename)
-    dstfile = os.path.join(AUDIO_GOOGLE_DRIVE_PATH, filename)
+    dstfile = os.path.join(AUDIO_DOWNLOAD_GOOGLE_PATH, filename)
     
     command = generate_command_v2(url, options, only_audio=True, output=output, outpath=outpath)
     subprocess.call(command, shell=True)

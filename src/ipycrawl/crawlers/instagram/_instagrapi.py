@@ -19,6 +19,8 @@ from pydantic import HttpUrl
 
 
 from ipycrawl import credential
+from ipycrawl.config import * 
+
 
 
 CREDENTIAL_PATH = os.environ['INSTAGRAM_CREDENTIAL_PATH']

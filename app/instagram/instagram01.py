@@ -7,20 +7,10 @@ import sys
 import platform 
 
 
-COMPUTER_NAME = platform.uname().node
-print('COMPUTER_NAME: ', COMPUTER_NAME)
-
-if COMPUTER_NAME == "RYZEN9-X570-AORUS-ELITE":
-    os.environ['INSTAGRAM_CREDENTIAL_PATH'] = "J:\\내 드라이브\\__CREDENTIALS__\\INSTAGRAM\\credentials.json"
-    os.environ['INSTAGRAM_DOWNLOAD_PATH'] = "D:\\__GABRIELE_DRIVE__\\LatinDanceData\\Instagram"
-    
-elif COMPUTER_NAME == "":
-    os.environ['INSTAGRAM_CREDENTIAL_PATH'] = "H:\\My Drive\\__CREDENTIALS__\\INSTAGRAM\\credentials.json"
-    os.environ['INSTAGRAM_DOWNLOAD_PATH']
-
-
 sys.path.append("D:\\pypjts\\iCrawler\\src")
 from ipycrawl.crawlers.instagram import _instagrapi 
+
+
 
 
 
@@ -40,7 +30,7 @@ from ipycrawl.crawlers.instagram import _instagrapi
 
 
 
-
+# https://www.instagram.com/reel/DC1JCBsCXwS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==
 
 if __name__ == "__main__":
     
