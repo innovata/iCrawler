@@ -24,18 +24,18 @@ os.environ['FFMPEG_BIN_LOCATION'] = ffmpeg_path
 
 
 ################################################################
-# Youtube
+# YouTube
 ################################################################
 
 credentials_path = ''
-VIDEO_DOWNLOAD_PATH = "D:\\GABRIELE_DRIVE\\Bachata_Demos\\Temp"
-AUDIO_DOWNLOAD_PATH = "D:\\GABRIELE_DRIVE\\LatinMusic\\Bachata"
-AUDIO_GOOGLE_DRIVE_PATH = "H:\\내 드라이브\\MEDIA_DRIVE\\Latin_Music\\Bachata"
+video_dir = "D:\\GABRIELE_DRIVE\\Bachata_Demos\\Temp"
+audio_dir = "D:\\GABRIELE_DRIVE\\LatinMusic\\Bachata"
+audio_google_dir = "H:\\내 드라이브\\MEDIA_DRIVE\\MUSIC\\Latin_Music\\Bachata"
 
 os.environ['YOUTUBE_CREDENTIAL_PATH'] = credentials_path
-os.environ['YOUTUBE_VIDEO_DOWNLOAD_PATH'] = VIDEO_DOWNLOAD_PATH
-os.environ['YOUTUBE_AUDIO_DOWNLOAD_PATH'] = AUDIO_DOWNLOAD_PATH
-os.environ['YOUTUBE_AUDIO_DOWNLOAD_GOOGLE_PATH'] = AUDIO_GOOGLE_DRIVE_PATH
+os.environ['YOUTUBE_VIDEO_DOWNLOAD_PATH'] = video_dir
+os.environ['YOUTUBE_AUDIO_DOWNLOAD_PATH'] = audio_dir
+os.environ['YOUTUBE_AUDIO_DOWNLOAD_GOOGLE_PATH'] = audio_google_dir
 
 
 

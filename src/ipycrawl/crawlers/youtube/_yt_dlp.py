@@ -20,7 +20,7 @@ import yt_dlp
 
 
 
-
+FFMPEG_LOCATION = os.environ['FFMPEG_BIN_LOCATION']
 
 VIDEO_DOWNLOAD_PATH = os.environ['YOUTUBE_VIDEO_DOWNLOAD_PATH']
 AUDIO_DOWNLOAD_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_PATH']
@@ -76,7 +76,8 @@ def extract_audio(url):
 def download_audio_files_from_playlist(url):
     # url ="https://www.youtube.com/playlist?list=PL_a1wRn79us-7t6zoK90sUrqM7RIG1qAR" 
     # command = f'yt-dlp -x --audio-format mp3 --audio-quality 320k --ffmpeg-location \"{FFMPEG_LOCATION}\" --yes-playlist {url}'
-    command = generate_command(url, type='audio')
+    # command = generate_command(url, type='audio')
+    command = generate_command_v2(url, options=default_audio_options(), only_audio=True)
     subprocess.call(command, shell=True)
     
     print('DONE.')
@@ -87,6 +88,12 @@ def download_audio_files_from_playlist(url):
 # FINAL APIs
 # ============================================================
 
+# 오디오 옵션 생성
+def default_audio_options(format='mp3', quality='320k'):
+    return {
+        '--audio-format': 'mp3',
+        '--audio-quality': '320k',
+    }
 
 def extract_information(url):
     # ℹ️ See help(yt_dlp.YoutubeDL) for a list of available options and public functions
@@ -159,12 +166,12 @@ def generate_command_v2(url, options, only_audio=False, output=None, outpath=Non
 
     # 공통적용 옵션들
     output = f"%(title)s.%(ext)s" if output is None else output 
+    outdir = AUDIO_DOWNLOAD_PATH if outpath is None else outpath
     options.update({
         '--ffmpeg-location': FFMPEG_LOCATION,
         '-o': output,
+        '-P': outdir,
     })
-    if outpath is not None:
-        options.update({"-P": outpath})
 
 
     m = re.search('/playlist?', url)

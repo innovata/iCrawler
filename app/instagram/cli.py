@@ -4,6 +4,7 @@
 
 import os 
 import sys 
+import platform 
 
 
 sys.path.append("D:\\pypjts\\iCrawler\\src")
@@ -32,19 +33,20 @@ from ipycrawl.crawlers.instagram import _instagrapi
 # https://www.instagram.com/reel/DC1JCBsCXwS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==
 
 if __name__ == "__main__":
+    
+    print(sys.argv)
+
+    # 호출할 함수
+    func_name = sys.argv[1]
+    func = getattr(_instagrapi, func_name)
+    print('Executed Function:', func)
 
 
-    # 컬렉션
-    # collections = _instagrapi.get_collections()
-    # print('\nCollections--> Count: %s' % len(collections))
-    # for c in collections: print(c)
+    # 공통 로그인
+    _instagrapi.login('gabriele')
 
-    # medias = _instagrapi.get_medias_of_collection(collections[0])
-    # print('\nMedias--> Count: %s' % len(medias))
-    # for m in medias[:5]: print('\n\n', m)
-
-
-    # _instagrapi.download_collection_medias('All posts')
-
-
-    pass 
+    # 사용자 입력
+    url = input("Input your Instagram URL: ")
+    print('URL: ' + url)
+    # 실행
+    func(url)
