@@ -20,18 +20,39 @@ import yt_dlp
 
 
 
-FFMPEG_LOCATION = os.environ['FFMPEG_BIN_LOCATION']
+# ============================================================
+# GLOBAL VARIABLES 
+# ============================================================
 
-VIDEO_DOWNLOAD_PATH = os.environ['YOUTUBE_VIDEO_DOWNLOAD_PATH']
-AUDIO_DOWNLOAD_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_PATH']
-AUDIO_DOWNLOAD_GOOGLE_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_GOOGLE_PATH']
+try:
+    FFMPEG_LOCATION = os.environ['FFMPEG_BIN_LOCATION']
+except Exception as e:
+    print("ERROR |", e)
+    raise 
+
+try:
+    VIDEO_DOWNLOAD_PATH = os.environ['YOUTUBE_VIDEO_DOWNLOAD_PATH']
+except Exception as e:
+    print("WARNING |", e)
+
+try:
+    AUDIO_DOWNLOAD_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_PATH']
+except Exception as e:
+    print("WARNING |", e)
+
+try:
+    AUDIO_DOWNLOAD_GOOGLE_PATH = os.environ['YOUTUBE_AUDIO_DOWNLOAD_GOOGLE_PATH']
+except Exception as e:
+    print("WARNING |", e)
+
+
 
 
 # ============================================================
 # TESTs 
 # ============================================================
 
-
+"""
 def download_video(url):
 # Replace this URL with the YouTube video you want to download
 
@@ -44,7 +65,7 @@ def download_video(url):
 
     except Exception as e:
         print(f'An error occurred: {e}')
-
+"""
 
 
 
